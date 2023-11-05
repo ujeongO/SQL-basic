@@ -66,31 +66,57 @@ select name, mod(attack, 2) as 'div2'
 from mypokemon;
 
 # mission_10
-select name, abs(attack - defense)
+select name, abs(attack - defense) as 'diff'
 from mypokemon
 where attack <= 50;
 
-# mission_11
+/* mission_11
+현재 날짜와 시간을 가져와 주세요. 각각 now_date, now_time 이라는 별명으로 가져와 주세요.
+*/
 select current_date() as 'now_date', current_time() as 'now_time';
 
 select * from mypokemon;
-# mission_12
+/* mission_12 
+포켓몬을 포획한 달(월, Month)을 숫자와 영어로 가져와 주세요.
+숫자는 month_num, 영어는 month_eng 이라는 별명으로 가져와 주세요.
+*/
 select month(capture_date) as month_num, monthname(capture_date) as month_eng
 from mypokemon;
 
-# mission_13
+/* mission_13 
+포켓몬을 포획한 날의 요일을 숫자와 영어로 가져와 주새요.
+숫자는 day_num, 영어는 day_eng 이라는 별명으로 가져와 주세요.
+*/
 select dayofweek(capture_date) as day_num, dayname(capture_date) as day_eng
 from mypokemon;
 
-# mission_14
+/* mission_14 
+포켓몬을 포획한 날의 연도, 월, 일을 각각 숫자로 가져와 주세요.
+연도는 year, 월은 month, 일은 day 라는 별명으로 가져와 주세요.
+*/
 select year(capture_date) as 'year', 
 	month(capture_date) as 'month',
 	day(capture_date) as 'day'
 from mypokemon;
 
 
+# 데이터 그룹화하기
+select * from mypokemon;
 
+select type
+from mypokemon
+group by type;
 
+select type, count(*), count(1), avg(attack), max(defense)
+from mypokemon
+group by type
+having count(1)=3;
+
+select type, count(*), count(1), max(defense)
+from mypokemon
+where name like '%a%'
+group by type
+having max(defense);
 
 
 
